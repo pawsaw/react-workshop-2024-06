@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useCallback } from 'react';
 import './App.css';
+import { BookList } from './components/BookList/BookList';
+import { OnBookClicked } from './components/BookList/OnBookClicked';
+import { Book, useBooks } from './domain/books';
 
 function App() {
+  const { books, reloadBooks } = useBooks();
+
+  const onBookClicked: OnBookClicked = useCallback((book: Book) => {
+    alert(book.price); // ... ich verbringe hier 10h
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Book Manager</h1>
+      <button onClick={() => reloadBooks()}>Reload Books</button>
+      {books ? <BookList books={books} onBookClicked={onBookClicked} /> : <p>Loading...</p>}
     </div>
   );
 }
