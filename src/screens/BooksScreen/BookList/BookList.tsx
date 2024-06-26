@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookListItem } from './BookListItem/BookListItem';
-import { Book } from '../../domain/books/Book';
 import { OnBookClicked } from './OnBookClicked';
+import { Book } from '../../../domain/books';
 
 export interface BookListProps {
   books: Book[];
